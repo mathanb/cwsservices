@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.cws.datamodel"
+	default-access="field">
+	<class name="SubscriptionModel" table="subscription" dynamic-update="true">
+		<id name="id" column="id" type="java.math.BigInteger" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="createdDate" column="createddate" type="timestamp" />
+		<property name="subscriptionEmail" column="subscriptionemail" type="string" />
+	</class>
+</hibernate-mapping>

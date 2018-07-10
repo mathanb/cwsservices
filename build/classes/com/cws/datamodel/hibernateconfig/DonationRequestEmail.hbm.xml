@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping package="com.cws.datamodel"
+	default-access="field">
+	<class name="DonationRequestEmailModel" table="donationrequestemail" dynamic-update="true">
+		<id name="id" column="id" type="java.math.BigInteger" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<property name="createdDate" column="createddate" type="timestamp" />
+		<property name="fullName" column="fullname" type="string" />
+		<property name="occassionDate" column="occassiondate" type="timestamp" />
+		<property name="fromEmail" column="fromemail" type="string" />
+		<property name="toEmail" column="toemail" type="string" />
+		<property name="emailSubject" column="subject" type="string" />
+		<property name="emailMessage" column="message" type="string" />
+        <property name="userIpAddress" column="useripaddress" type="string" />		
+
+	</class>
+</hibernate-mapping>
