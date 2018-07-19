@@ -18,6 +18,7 @@ public class Email {
 	private String emailSubject;
 	private String emailMessage;
 	private String userIpAddress;
+	private String phone;
 	
 
 
@@ -26,6 +27,18 @@ public class Email {
 	 */
 	public String getUserIpAddress() {
 		return userIpAddress;
+	}
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	/**
 	 * @param userIpAddress the userIpAddress to set

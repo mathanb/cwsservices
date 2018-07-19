@@ -54,7 +54,7 @@ public class CWSEmailService {
 	public JSONObject sendMailPost(@PathParam("fullName") String fullName, @PathParam("occassionDate") String occassionDate, @PathParam("fromEmail") String fromEmail, @PathParam("toEmail") String toEmail, 
 			@PathParam("emailSubject") String emailSubject, @PathParam("emailMessage") String emailMessage) {
 		
-		System.out.println("Date = " + occassionDate);
+		
 		Email email = new Email();
 		email.setFullName(fullName);
 		email.setOccassionDate(CommonUtils.convertStringToDate(occassionDate));
@@ -109,7 +109,6 @@ public class CWSEmailService {
 			} 		
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 
 	@GET
@@ -169,7 +168,40 @@ public class CWSEmailService {
 	}
 	
 	
+	@GET
+	@Path("/contactemail/{name}/{phone}/{email}/{message}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject contactUsMail(@PathParam("name") String name, @PathParam("phone") String phone, @PathParam("email") String email, @PathParam("message") String message) {
+		
+		return contactUsPost(name, phone, email, message);
+	}
 	
+	@POST
+	@Path("/contactemail/{name}/{phone}/{email}/{message}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject contactUsPost(@PathParam("name") String name, @PathParam("phone") String phone, @PathParam("email") String toemail, @PathParam("message") String message)  {
+		
+		Email email = new Email();
+		email.setFullName(name);
+		email.setPhone(phone);
+		email.setToEmail(toemail);
+		
+		email.setEmailMessage(message);
+		email.setUserIpAddress(httpRequest.getRemoteAddr());
+		
+		final JSONObject obj = new JSONObject();
+		try {
+			SendEmail.sendEmailTLS(email);
+			saveSendEmail(email);
+			obj.put("result", SUCCESS_MSG);
+		} catch (Exception e) {
+			logger.error("Error in sendMailPost, error is: " + e.getMessage());
+			obj.put("result", FAILED_MSG);
+		}
+		
+		return obj;
+	}
+
 	
 	
 	
